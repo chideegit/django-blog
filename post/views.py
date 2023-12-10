@@ -89,3 +89,11 @@ def post_details(request, slug):
     post = Post.objects.get(slug=slug)
     context = {'post':post}
     return render(request, 'post/post_details.html', context)
+
+@login_required
+def like_post(request, pk):
+    post = Post.objects.get(pk=pk)
+    post.likes = post.likes + 1 
+    post.save()
+    messages.success(request, 'You just liked this Post!')
+    return reverse("post-details", args=[str(post.slug)])

@@ -22,3 +22,6 @@ class Post(models.Model):
     likes = models.PositiveIntegerField(default=0)
     slug = models.SlugField(unique=True)
 
+# only logged in users can like posts
+# once a post is liked, it is saved to the users liked posts list 
+
