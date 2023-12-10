@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Associated Post</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for category in categories %}
+        <tr>
+            <td>{{category.title}} <a href="{% url 'update-category' category.title %}"><i class="fa fa-pencil"></i></a>
+            </td>
+            <td>{{category.post_set.all.count}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock content %}
