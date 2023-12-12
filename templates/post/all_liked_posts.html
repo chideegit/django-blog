@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Date Liked</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for post in posts %}
+        <tr>
+            <td>{{post.post.title}} <a href="{% url 'post-details' post.post.slug %}"><i class="fa fa-eye"></i></a>
+            </td>
+            <td>{{post.date_created}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock content %}

@@ -90,10 +90,24 @@ def post_details(request, slug):
     context = {'post':post}
     return render(request, 'post/post_details.html', context)
 
-@login_required
+
 def like_post(request, pk):
     post = Post.objects.get(pk=pk)
-    post.likes = post.likes + 1 
-    post.save()
-    messages.success(request, 'You just liked this Post!')
-    return reverse("post-details", args=[str(post.slug)])
+    if request.user.is_authenticated:
+        if LikedPost.objects.filter(user=request.user, post=post.pk).exists():
+            messages.warning(request, 'You already liked this post. You can check it out in the liked posts page')
+            return redirect('website')
+        else:
+            post.likes = post.likes + 1 
+            post.save()
+            LikedPost.objects.create(user=request.user, post=post)
+            messages.success(request, 'You just liked this Post!')
+            return redirect('website')
+    else:
+        messages.warning(request, 'You need to be logged in to like posts')
+        return redirect('login')
+
+def all_liked_posts(request):
+    posts = LikedPost.objects.filter(user=request.user)
+    context = {'posts':posts}
+    return render(request, 'post/all_liked_posts.html', context)

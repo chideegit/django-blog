@@ -13,10 +13,11 @@
     {{post.description|safe}}
 </div>
 
+
 <div>
     <div class="card">
         <div class="card-body">
-            Did You find this Post Helpful? <a href="">Yes</a> or <a href="">No</a>
+            Did You find this Post Helpful? <a href="{% url 'like-post' post.pk %}">Yes</a> or <a href="">No</a>
         </div>
     </div>
 </div> <br>

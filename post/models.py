@@ -22,6 +22,11 @@ class Post(models.Model):
     likes = models.PositiveIntegerField(default=0)
     slug = models.SlugField(unique=True)
 
+class LikedPost(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    date_created = models.DateTimeField(auto_now_add=True)
+
 # only logged in users can like posts
 # once a post is liked, it is saved to the users liked posts list 
 
