@@ -1,0 +1,3 @@
+add search func
+get all the posts that belongs to a single category 
+normal users cannot create category, only global admins can. 
